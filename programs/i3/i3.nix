@@ -1,6 +1,17 @@
 { config, pkgs, lib, ... }:
 let
   mod = "Mod4";
+
+  bgColor  = "#282828";
+  red      = "#cc241d";
+  green    = "#98971a";
+  yellow   = "#d79921";
+  blue     = "#458588";
+  purple   = "#b16286";
+  aqua     = "#689d68";
+  gray     = "#a89984";
+  darkgray = "#1d2021";
+  white    = "#ffffff";
 in
 {
   xsession.windowManager.i3 = {
@@ -10,12 +21,28 @@ in
         {
           command = ''${pkgs.xorg.setxkbmap}/bin/setxkbmap -option "caps:escape"'';
           always = true;
+          notification = false;
+        }
+        {
+          command = "screenrotator";
+          always = true;
+          notification = false;
+        }
+        {
+          command = "nm-applet";
+          always = true;
+          notification = false;
+        }
+        {
+          command = "blueman-applet";
+          always = true;
+          notification = false;
         }
       ];
 
       modifier = mod;
 
-      fonts = ["DejaVu Sans Mono, FontAwesome 9"];
+      fonts = ["Pango, Hack 9"];
 
       keybindings = lib.mkOptionDefault {
         "${mod}+Return" = "exec urxvt";
@@ -49,14 +76,80 @@ in
         ## Backlighting
         XF86MonBrightnessUp = "exec xbacklight -inc 10";
         XF86MonBrightnessDown = "exec xbacklight -dec 10";
+
       };
 
       bars = [
         {
           position = "bottom";
           statusCommand = "${pkgs.i3status}/bin/i3status";
+          colors = {
+            background = "${bgColor}";
+
+            statusline = "${yellow}";
+
+            focusedWorkspace = {
+              border     = "${aqua}";
+              background = "${aqua}";
+              text       = "${darkgray}";
+            };
+
+            inactiveWorkspace = {
+              border     = "${darkgray}";
+              background = "${darkgray}";
+              text       = "${yellow}";
+            };
+
+            activeWorkspace = {
+              border     = "${darkgray}";
+              background = "${darkgray}";
+              text       = "${yellow}";
+            };
+
+            urgentWorkspace = {
+              border     = "${red}";
+              background = "${red}";
+              text       = "${bgColor}";
+            };
+          };
         }
       ];
+
+      colors = {
+        background = "${bgColor}";
+        
+        focused = {
+          border      = "${aqua}";
+          background  = "${aqua}";
+          text        = "${darkgray}";
+          indicator   = "${purple}";
+          childBorder = "${darkgray}";
+        };
+        
+        unfocused = {
+          border     = "${darkgray}";
+          background = "${darkgray}";
+          text       = "${yellow}";
+          indicator   = "${purple}";
+          childBorder = "${darkgray}";
+        };
+        
+        focusedInactive = {
+          border     = "${darkgray}";
+          background = "${darkgray}";
+          text       = "${yellow}";
+          indicator   = "${purple}";
+          childBorder = "${darkgray}";
+        };
+        
+        urgent = {
+          border     = "${red}";
+          background = "${red}";
+          text       = "${white}";
+          indicator   = "${red}";
+          childBorder = "${red}";
+        };
+      };
 
       window.commands = [
         {
@@ -85,38 +178,26 @@ in
           format = " cpu  %usage ";
         };
       };
-      "load" = {
-        position = 1;
-        settings = {
-          format = " load %1min ";
-          # max_threshold = 0.3
-        };
-      };
+
       "disk /" = {
-        position = 2;
+        position = 1;
         settings = {
           # format = " hdd %avail "
           format = " ⛁ %avail ";
         };
       };
-      "ethernet _first_" = {
-        position = 3;
-        settings = {
-          # if you use %speed, i3status requires root privileges
-          format_up = " lan: %ip %speed ";
-          format_down = " no lan ";
-        };
-      };
+
       "volume master" = {
-        position = 3.9;
+        position = 2;
         settings = {
           format = "♪: %volume";
           format_muted = "♪: muted (%volume)";
           device = "default";
         };
       };
+
       "battery all" = {
-        position = 4;
+        position = 3;
         settings = {
           format = "%status %percentage";
           format_down = "No battery";
@@ -143,8 +224,14 @@ in
         };
       };
 
+      "load" = {
+      };
+
+      "ethernet _first_" = {
+      };
+
       "memory" = {
-        position = 5;
+        position = 4;
         settings = {
           format = "%used | %available";
           threshold_degraded = "1G";
@@ -153,10 +240,10 @@ in
       };
 
       "tztime local" = {
-        position = 6;
+        position = 5;
         settings = {
           # format = "%Y-%m-%d %H:%M:%S";
-          format = " %Y-%m-%d. %H:%M:%S ";
+          format = " %Y-%m-%d %H:%M:%S ";
         };
       };
     };
