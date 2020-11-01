@@ -46,9 +46,11 @@
 
     # Utilities
     ag
+    autorandr
+    feh
     htop
-    powertop
     nerdfonts
+    powertop
   ];
 
   home.sessionVariables = {

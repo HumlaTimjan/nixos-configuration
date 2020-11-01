@@ -11,7 +11,7 @@ let
   aqua     = "#689d68";
   gray     = "#a89984";
   darkgray = "#1d2021";
-  white    = "#ffffff";
+  white    = "#ebdbb2";
 in
 {
   xsession.windowManager.i3 = {
@@ -38,6 +38,11 @@ in
           always = true;
           notification = false;
         }
+        {
+          command = "feh --bg-center ~/Pictures/nix-background.png";
+          always = true;
+          notification = false;
+        }
       ];
 
       modifier = mod;
@@ -46,7 +51,6 @@ in
 
       keybindings = lib.mkOptionDefault {
         "${mod}+Return" = "exec urxvt";
-        "${mod}+p" = "exec ${pkgs.dmenu}/bin/dmenu_run";
         "${mod}+x" = "exec sh -c '${pkgs.maim}/bin/maim -s | xclip -selection clipboard -t image/png'";
 #        "${mod}+Shift+x" = "exec sh -c '${pkgs.i3lock-fancy-rapid}/bin/i3lock-fancy-rapid 5 3'";
 
@@ -62,9 +66,8 @@ in
         "${mod}+Shift+k" = "move up";
         "${mod}+Shift+l" = "move right";
 
-        # My multi monitor setup
-        "${mod}+m" = "move workspace to output DP-2";
-        "${mod}+Shift+m" = "move workspace to output DP-5";
+        # Multi monitors
+        "${mod}+p" = "exec autorandr --change";
 
         # Multimedia Keys
 
