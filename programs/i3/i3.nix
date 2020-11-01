@@ -151,14 +151,7 @@ in
         };
       };
 
-      window.commands = [
-        {
-          command = "border pixel 1"; 
-          criteria = { 
-            class = "*"; 
-          };
-        }
-      ];
+      window.titlebar = false;
     };
   };
 
