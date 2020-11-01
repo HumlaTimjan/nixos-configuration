@@ -19,6 +19,8 @@
   # changes in each release.
   home.stateVersion = "20.09";
 
+  fonts.fontconfig.enable = true;
+
   imports = [
     programs/neovim/neovim.nix
     programs/i3/i3.nix
@@ -33,6 +35,7 @@
     rxvt-unicode-unwrapped
     xorg.setxkbmap
     xorg.xbacklight
+    xorg.libXft
 
     # Development
     git
@@ -45,6 +48,7 @@
     ag
     htop
     powertop
+    nerdfonts
   ];
 
   home.sessionVariables = {

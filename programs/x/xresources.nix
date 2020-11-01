@@ -39,14 +39,21 @@
 
 
     ! --- Urxvt config
-    URxvt.scrollBar: false
+    URxvt.scrollBar:   false
+    URxvt.cursorBlink: true
 
-    ! --- Set Ctrl + Shift + c/v for copy/past
+    ! --- Set Ctrl + Shift + c/v for copy/paste
     URxvt.keysym.Shift-Control-V: eval:paste_clipboard
     URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
-    URxvt.iso14755: false
-    URxvt.iso14755_52: false
+    URxvt.iso14755:               false
+    URxvt.iso14755_52:            false
 
-    URxvt.font:xft:Monospace:pixelsize=15
+    ! --- Font setup
+    URxvt.font:           xft:Hasklug Nerd Font Mono,Hasklig Medium:style=Medium,Regular:pixelsize=11
+    URxvt.boldFont:       xft:Hasklug Nerd Font Mono:style=Bold:pixelsize=15
+    URxvt.italicFont:     xft:Hasklug Nerd Font Mono:style=Italic:pixelsize=15
+    URxvt.boldItalicFont: xft:Hasklug Nerd Font Mono:style=Bold Italic:pixelsize=15
+
+    Xft*antialias:        true
   '';
 }

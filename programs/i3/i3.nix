@@ -42,7 +42,7 @@ in
 
       modifier = mod;
 
-      fonts = ["Pango, Hack 9"];
+      fonts = ["Hasklug Nerd Font Mono,Hasklig Medium 11"];
 
       keybindings = lib.mkOptionDefault {
         "${mod}+Return" = "exec urxvt";
@@ -164,6 +164,7 @@ in
 
   programs.i3status = {
     enable = true;
+    enableDefault = false;
     general = {
       colors = true;
       interval = 5;
@@ -206,28 +207,17 @@ in
 
           integer_battery_capacity = true;
 
-          # status_chr = "";
           status_chr = "⚡";
 
-          # status_bat = "bat";
-          # status_bat = "☉";
-          status_bat = "";
+          status_bat = "☉";
 
-          # status_unk = "?";
           status_unk = "";
 
-          # status_full = "";
           status_full = "☻";
 
           low_threshold = 15;
           threshold_type = "time";
         };
-      };
-
-      "load" = {
-      };
-
-      "ethernet _first_" = {
       };
 
       "memory" = {
@@ -242,7 +232,6 @@ in
       "tztime local" = {
         position = 5;
         settings = {
-          # format = "%Y-%m-%d %H:%M:%S";
           format = " %Y-%m-%d %H:%M:%S ";
         };
       };
