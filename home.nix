@@ -48,6 +48,7 @@
     ag
     autorandr
     feh
+    gparted
     htop
     nerdfonts
     powertop
@@ -76,9 +77,11 @@
       "d" = "diff";
       "co" = "checkout";
       "br" = "checkout -b";
+      "r"  = "rebase";
 
       # Commits, additions, and modifications
       "cm" = "commit -m";
+      "ca" = "commit --amend";
       "aa" = "add .";
       "rh" = "reset --hard";
       "p"  = "push";
@@ -89,6 +92,7 @@
       "lo" = "log --oneline";
       "ln" = "log -n"; # follow with a number to show n logs
       "lon" = "log --oneline -n"; # follow with a number to show n logs
+      "tree" = "log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all";
     };
   };
 }

@@ -19,7 +19,7 @@ in
     config = {
       startup = [
         {
-          command = ''${pkgs.xorg.setxkbmap}/bin/setxkbmap -option "caps:escape"'';
+          command = ''${pkgs.xorg.setxkbmap}/bin/setxkbmap -option "caps:escape,compose:ralt"'';
           always = true;
           notification = false;
         }
@@ -173,6 +173,13 @@ in
         position = 0;
         settings = {
           format = " cpu  %usage ";
+        };
+      };
+
+      "cpu_temperature 1" = {
+        position = 0.5;
+        settings = {
+          format = "%degrees °C";
         };
       };
 
