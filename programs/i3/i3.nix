@@ -40,7 +40,7 @@ in
         }
         {
           command = "feh --bg-center ~/Pictures/nix-background.png";
-          always = true;
+          always = false;
           notification = false;
         }
       ];
@@ -50,9 +50,9 @@ in
       fonts = ["Hasklug Nerd Font Mono,Hasklig Medium 11"];
 
       keybindings = lib.mkOptionDefault {
-        "${mod}+Return" = "exec urxvt";
+        "${mod}+Return" = "exec alacritty";
         "${mod}+x" = "exec sh -c '${pkgs.maim}/bin/maim -s | xclip -selection clipboard -t image/png'";
-#        "${mod}+Shift+x" = "exec sh -c '${pkgs.i3lock-fancy-rapid}/bin/i3lock-fancy-rapid 5 3'";
+        "${mod}+Shift+x" = "exec sh -c '${pkgs.i3lock-fancy-rapid}/bin/i3lock-fancy-rapid 15 8'";
 
         # Focus
         "${mod}+h" = "focus left";
@@ -67,7 +67,7 @@ in
         "${mod}+Shift+l" = "move right";
 
         # Multi monitors
-        "${mod}+p" = "exec autorandr --change";
+        "${mod}+p" = "exec autorandr --change && feh --bg-center ~/Pictures/nix-background.png";
 
         # Multimedia Keys
 
@@ -77,8 +77,8 @@ in
         XF86AudioMute = "exec --no-startup-id pactl set-sink-mute 0 toggle";
 
         ## Backlighting
-        XF86MonBrightnessUp = "exec xbacklight -inc 10";
-        XF86MonBrightnessDown = "exec xbacklight -dec 10";
+        XF86MonBrightnessUp = "exec brightnessctl set +10%";
+        XF86MonBrightnessDown = "exec brightnessctl set 10%-";
 
       };
 
@@ -155,6 +155,7 @@ in
       };
 
       window.titlebar = false;
+      window.border = 4;
     };
   };
 

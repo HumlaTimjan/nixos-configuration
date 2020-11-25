@@ -24,41 +24,49 @@
   imports = [
     programs/neovim/neovim.nix
     programs/i3/i3.nix
-    programs/x/xresources.nix
+    programs/alacritty/alacritty.nix
   ];
 
   nixpkgs.config.allowUnfree = true;
 
   home.packages = with pkgs; [
-    chromium
     glibcLocales
-    rxvt-unicode-unwrapped
     xorg.setxkbmap
-    xorg.xbacklight
     xorg.libXft
 
+    # Display Management
+    autorandr
+    brightnessctl
+    i3lock-fancy-rapid
+
     # Development
-    git
     jetbrains.idea-community
-    jdk
+    jdk14
     kotlin
     nodejs
 
+    # Games
+    steam
+    retroarch
+
     # Utilities
+    gitAndTools.diff-so-fancy
     ag
-    autorandr
+    chromium
     feh
     gparted
     htop
     nerdfonts
-    powertop
+    unzip
+
+    # Communication
+    slack
   ];
 
   home.sessionVariables = {
     EDITOR = "vim";
     BROWSER = "chromium";
     LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
-    TERMINFO_DIRS = "${pkgs.rxvt-unicode-unwrapped.terminfo.outPath}/share/terminfo";                                                                                                                                             
   };
 
   programs.bash = import ./programs/bash/bash.nix;
@@ -70,6 +78,8 @@
     enable = true;
     userEmail = "rydback@gmail.com";
     userName = "Birger Rydback";
+
+    extraConfig.core.pager = "diff-so-fancy | less --tabs=4 -RFX";
 
     aliases = {
       "f" = "fetch -pt";
