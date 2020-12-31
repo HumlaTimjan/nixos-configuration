@@ -41,7 +41,8 @@
 
     # Development
     jetbrains.idea-community
-    jdk14
+    android-studio
+    adoptopenjdk-hotspot-bin-15
     kotlin
     nodejs
 
@@ -58,6 +59,7 @@
     htop
     nerdfonts
     unzip
+    zoom-us
 
     # Communication
     slack
