@@ -50,7 +50,7 @@ in
       fonts = ["Hasklug Nerd Font Mono,Hasklig Medium 11"];
 
       keybindings = lib.mkOptionDefault {
-        "${mod}+Return" = "exec alacritty";
+        "${mod}+Return" = "exec urxvt";
         "${mod}+x" = "exec sh -c '${pkgs.maim}/bin/maim -s | xclip -selection clipboard -t image/png'";
         "${mod}+Shift+x" = "exec sh -c '${pkgs.i3lock-fancy-rapid}/bin/i3lock-fancy-rapid 15 8'";
 

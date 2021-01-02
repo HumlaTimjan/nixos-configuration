@@ -24,7 +24,7 @@
   imports = [
     programs/neovim/neovim.nix
     programs/i3/i3.nix
-    programs/alacritty/alacritty.nix
+    programs/x/xresources.nix
   ];
 
   nixpkgs.config.allowUnfree = true;
@@ -33,6 +33,7 @@
     glibcLocales
     xorg.setxkbmap
     xorg.libXft
+    rxvt-unicode-unwrapped
 
     # Display Management
     autorandr
@@ -69,6 +70,7 @@
     EDITOR = "vim";
     BROWSER = "chromium";
     LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
+    TERMINFO_DIRS = "${pkgs.rxvt-unicode-unwrapped.terminfo.outPath}/share/terminfo";
   };
 
   programs.bash = import ./programs/bash/bash.nix;
