@@ -6,8 +6,8 @@
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
-  home.username = "betongsuggan";
-  home.homeDirectory = "/home/betongsuggan";
+  home.username = "birgerrydback";
+  home.homeDirectory = "/home/birgerrydback";
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
@@ -41,9 +41,13 @@
     i3lock-fancy-rapid
 
     # Development
-    jetbrains.idea-community
-    android-studio
     adoptopenjdk-hotspot-bin-15
+    android-studio
+    awscli2
+    docker-compose
+    gnumake
+    jetbrains.idea-community
+    jq
     kotlin
     nodejs
 
@@ -57,8 +61,13 @@
     chromium
     feh
     gparted
+    gnome3.gedit
     htop
     nerdfonts
+    lastpass-cli
+    pgcli
+    postman
+    newman
     unzip
     zoom-us
 
@@ -80,7 +89,7 @@
 
   programs.git = {
     enable = true;
-    userEmail = "rydback@gmail.com";
+    userEmail = "birger@humla.io";
     userName = "Birger Rydback";
 
     extraConfig.core.pager = "diff-so-fancy | less --tabs=4 -RFX";
@@ -89,6 +98,7 @@
       "f" = "fetch -pt";
       "s" = "status";
       "d" = "diff";
+      "dn" = "diff --name-only";
       "co" = "checkout";
       "br" = "checkout -b";
       "r"  = "rebase";
@@ -97,6 +107,7 @@
       "cm" = "commit -m";
       "ca" = "commit --amend";
       "aa" = "add .";
+      "au" = "add -u";
       "rh" = "reset --hard";
       "p"  = "push";
       "fp"  = "push --force-with-lease";

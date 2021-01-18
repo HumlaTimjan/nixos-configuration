@@ -5,6 +5,7 @@
     ls = "ls --color=auto";
     vim = "nvim";
     hm = "home-manager";
+    gw = "./gradlew";
   };
   initExtra = ''
     set -o vi
