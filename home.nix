@@ -6,8 +6,8 @@
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
-  home.username = "birgerrydback";
-  home.homeDirectory = "/home/birgerrydback";
+  home.username = "betongsuggan";
+  home.homeDirectory = "/home/betongsuggan";
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
@@ -59,12 +59,15 @@
     gitAndTools.diff-so-fancy
     ag
     chromium
+    exfat
     feh
-    gparted
     gnome3.gedit
+    gparted
+    gthumb
     htop
     nerdfonts
     lastpass-cli
+    p7zip
     pgcli
     postman
     newman
@@ -89,7 +92,7 @@
 
   programs.git = {
     enable = true;
-    userEmail = "birger@humla.io";
+    userEmail = "rydback@gmail.com";
     userName = "Birger Rydback";
 
     extraConfig.core.pager = "diff-so-fancy | less --tabs=4 -RFX";
