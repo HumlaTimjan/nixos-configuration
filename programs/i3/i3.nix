@@ -19,7 +19,7 @@ in
     config = {
       startup = [
         {
-          command = ''${pkgs.xorg.setxkbmap}/bin/setxkbmap -option "caps:escape,compose:ralt"'';
+          command = ''${pkgs.xorg.setxkbmap}/bin/setxkbmap -layout us -variant colemak -option "caps:escape,compose:ralt"'';
           always = true;
           notification = false;
         }

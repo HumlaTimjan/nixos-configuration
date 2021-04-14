@@ -6,8 +6,8 @@
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
-  home.username = "betongsuggan";
-  home.homeDirectory = "/home/betongsuggan";
+  home.username = "birgerrydback";
+  home.homeDirectory = "/home/birgerrydback";
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
@@ -42,7 +42,6 @@
 
     # Development
     adoptopenjdk-hotspot-bin-15
-    android-studio
     awscli2
     docker-compose
     gnumake
@@ -51,26 +50,23 @@
     kotlin
     nodejs
 
-    # Games
-    steam
-    retroarch
-
     # Utilities
     gitAndTools.diff-so-fancy
     ag
-    chromium
     exfat
     feh
+    gimp
     gnome3.gedit
     gparted
     gthumb
     htop
-    nerdfonts
+    kazam
     lastpass-cli
     p7zip
+    nerdfonts
+    newman
     pgcli
     postman
-    newman
     unzip
     zoom-us
 
@@ -80,7 +76,7 @@
 
   home.sessionVariables = {
     EDITOR = "vim";
-    BROWSER = "chromium";
+    BROWSER = "firefox";
     LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
     TERMINFO_DIRS = "${pkgs.rxvt-unicode-unwrapped.terminfo.outPath}/share/terminfo";
   };
@@ -92,7 +88,7 @@
 
   programs.git = {
     enable = true;
-    userEmail = "rydback@gmail.com";
+    userEmail = "birger@humla.io";
     userName = "Birger Rydback";
 
     extraConfig.core.pager = "diff-so-fancy | less --tabs=4 -RFX";
