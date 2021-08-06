@@ -1,5 +1,4 @@
 { config, lib, pkgs, ... }:
-
 {
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
@@ -22,9 +21,12 @@
   fonts.fontconfig.enable = true;
 
   imports = [
-    programs/neovim/neovim.nix
-    programs/i3/i3.nix
-    programs/x/xresources.nix
+    ./programs/autorandr/autorandr.nix
+    ./programs/i3/i3.nix
+    ./programs/neovim/neovim.nix
+    ./programs/picom/picom.nix
+    ./programs/rofi/rofi.nix
+    ./programs/x/xresources.nix
   ];
 
   nixpkgs.config.allowUnfree = true;
@@ -36,16 +38,16 @@
     rxvt-unicode-unwrapped
 
     # Display Management
-    autorandr
     brightnessctl
     i3lock-fancy-rapid
 
     # Development
+    altair
     adoptopenjdk-hotspot-bin-15
     awscli2
     docker-compose
     gnumake
-    jetbrains.idea-community
+    jetbrains.idea-ultimate
     jq
     kotlin
     nodejs
@@ -61,17 +63,19 @@
     gthumb
     htop
     kazam
-    lastpass-cli
+    kdenlive
     p7zip
     nerdfonts
     newman
-    pgcli
     postman
+    rofi
+    xfce.thunar
     unzip
     zoom-us
 
     # Communication
     slack
+    teams
   ];
 
   home.sessionVariables = {
@@ -79,6 +83,7 @@
     BROWSER = "firefox";
     LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
     TERMINFO_DIRS = "${pkgs.rxvt-unicode-unwrapped.terminfo.outPath}/share/terminfo";
+    JAVA_HOME = "/nix/store/wq13csng9gcyyaj9qhjh8z9fr9cgvp7f-adoptopenjdk-hotspot-bin-15.0.2";
   };
 
   programs.bash = import ./programs/bash/bash.nix;
@@ -118,5 +123,12 @@
       "lon" = "log --oneline -n"; # follow with a number to show n logs
       "tree" = "log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all";
     };
+  };
+
+  systemd.user.services.mpris-proxy = {
+    Unit.Description = "Mpris proxy";
+    Unit.After = [ "network.target" "sound.target" ];
+    Service.ExecStart = "${pkgs.bluez}/bin/mpris-proxy";
+    Install.WantedBy = [ "default.target" ];
   };
 }

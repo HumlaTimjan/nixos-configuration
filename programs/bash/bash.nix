@@ -5,7 +5,7 @@
     ls = "ls --color=auto";
     vim = "nvim";
     hm = "home-manager";
-    gw = "./gradlew";
+    gw = "./gradlew --no-daemon";
   };
   initExtra = ''
     set -o vi
