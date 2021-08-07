@@ -5,8 +5,8 @@
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
-  home.username = "birgerrydback";
-  home.homeDirectory = "/home/birgerrydback";
+  home.username = "betongsuggan";
+  home.homeDirectory = "/home/betongsuggan";
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
@@ -16,17 +16,18 @@
   # You can update Home Manager without changing this value. See
   # the Home Manager release notes for a list of state version
   # changes in each release.
-  home.stateVersion = "20.09";
+  home.stateVersion = "21.05";
 
   fonts.fontconfig.enable = true;
 
   imports = [
-    ./programs/autorandr/autorandr.nix
-    ./programs/i3/i3.nix
-    ./programs/neovim/neovim.nix
-    ./programs/picom/picom.nix
-    ./programs/rofi/rofi.nix
-    ./programs/x/xresources.nix
+    ./programs/autorandr
+    ./programs/i3
+    ./programs/neovim
+    ./programs/picom
+    ./programs/polybar
+    ./programs/rofi
+    ./programs/x11
   ];
 
   nixpkgs.config.allowUnfree = true;
@@ -51,6 +52,11 @@
     jq
     kotlin
     nodejs
+
+    # Games
+    steam
+    retroarch
+    chiaki
 
     # Utilities
     gitAndTools.diff-so-fancy
@@ -86,14 +92,14 @@
     JAVA_HOME = "/nix/store/wq13csng9gcyyaj9qhjh8z9fr9cgvp7f-adoptopenjdk-hotspot-bin-15.0.2";
   };
 
-  programs.bash = import ./programs/bash/bash.nix;
+  programs.bash = import ./programs/bash;
   elemental.home.programs.neovim.enable = true;
 
   xsession.enable = true;
 
   programs.git = {
     enable = true;
-    userEmail = "birger@humla.io";
+    userEmail = "rydback@gmail.com";
     userName = "Birger Rydback";
 
     extraConfig.core.pager = "diff-so-fancy | less --tabs=4 -RFX";

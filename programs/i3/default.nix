@@ -15,7 +15,12 @@ in
           notification = false;
         }
         {
-          command = "screenrotator";
+          command = "systemctl --user restart polybar.service";
+          always = true;
+          notification = false;
+        }
+        {
+          command = "systemctl --user restart picom.service";
           always = true;
           notification = false;
         }
@@ -83,41 +88,42 @@ in
 
       };
 
-      bars = with theme.colors; [
-        {
-          position = "bottom";
-          statusCommand = "${pkgs.i3status}/bin/i3status";
-          colors = {
-            background = "${background}";
+      bars = [];
+      #bars = with theme.colors; [
+      #  {
+      #    position = "bottom";
+      #    statusCommand = "${pkgs.i3status}/bin/i3status";
+      #    colors = {
+      #      background = "${background}";
 
-            statusline = "${utilityText}";
+      #      statusline = "${utilityText}";
 
-            focusedWorkspace = {
-              border     = "${thirdText}";
-              background = "${thirdText}";
-              text       = "${borderDark}";
-            };
+      #      focusedWorkspace = {
+      #        border     = "${thirdText}";
+      #        background = "${thirdText}";
+      #        text       = "${borderDark}";
+      #      };
 
-            inactiveWorkspace = {
-              border     = "${borderDark}";
-              background = "${borderDark}";
-              text       = "${utilityText}";
-            };
+      #      inactiveWorkspace = {
+      #        border     = "${borderDark}";
+      #        background = "${borderDark}";
+      #        text       = "${utilityText}";
+      #      };
 
-            activeWorkspace = {
-              border     = "${borderDark}";
-              background = "${borderDark}";
-              text       = "${utilityText}";
-            };
+      #      activeWorkspace = {
+      #        border     = "${borderDark}";
+      #        background = "${borderDark}";
+      #        text       = "${utilityText}";
+      #      };
 
-            urgentWorkspace = {
-              border     = "${alertText}";
-              background = "${alertText}";
-              text       = "${background}";
-            };
-          };
-        }
-      ];
+      #      urgentWorkspace = {
+      #        border     = "${alertText}";
+      #        background = "${alertText}";
+      #        text       = "${background}";
+      #      };
+      #    };
+      #  }
+      #];
 
       gaps = {
         bottom = 10;
