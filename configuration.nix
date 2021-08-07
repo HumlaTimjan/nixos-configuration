@@ -56,7 +56,10 @@
     # Games
     steam
     retroarch
+    lutris
     chiaki
+    antimicroX
+    mangohud
 
     # Utilities
     gitAndTools.diff-so-fancy
@@ -89,7 +92,7 @@
     BROWSER = "firefox";
     LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
     TERMINFO_DIRS = "${pkgs.rxvt-unicode-unwrapped.terminfo.outPath}/share/terminfo";
-    JAVA_HOME = "/nix/store/wq13csng9gcyyaj9qhjh8z9fr9cgvp7f-adoptopenjdk-hotspot-bin-15.0.2";
+    JAVA_HOME = "${pkgs.adoptopenjdk-hotspot-bin-15}";
   };
 
   programs.bash = import ./programs/bash;
