@@ -1,169 +1,140 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, ... }:
-
+{ config, lib, pkgs, profile, ... }:
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  # Let Home Manager install and manage itself.
+  programs.home-manager.enable = true;
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # Home Manager needs a bit of information about you and the
+  # paths it should manage.
+  home.username = profile.user;
+  home.homeDirectory = "/home/${profile.user}";
 
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.grub.useOSProber = true;
+  # This value determines the Home Manager release that your
+  # configuration is compatible with. This helps avoid breakage
+  # when a new Home Manager release introduces backwards
+  # incompatible changes.
+  #
+  # You can update Home Manager without changing this value. See
+  # the Home Manager release notes for a list of state version
+  # changes in each release.
+  home.stateVersion = "21.05";
 
-  nixpkgs.config = {
-    allowUnfree = true; 
-  };
+  fonts.fontconfig.enable = true;
 
-  #nixpkgs.overlays = [
-  #  (self: super:
-  #    let
-  #      nixpkgs-mesa = builtins.fetchTarball
-  #        "https://github.com/nixos/nixpkgs/archive/bdac777becdbb8780c35be4f552c9d4518fe0bdb.tar.gz";
-  #    in { mesa_drivers = (import nixpkgs-mesa {}).mesa_drivers; })
-  #];
-
-  networking.hostName = "nixos"; # Define your hostname.
-  networking.networkmanager.enable = true;
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Set your time zone.
-  time.timeZone = "Europe/Stockholm";
-
-  # The global useDHCP flag is deprecated, therefore explicitly set to false here.
-  # Per-interface useDHCP will be mandatory in the future, so this generated config
-  # replicates the default behaviour.
-  networking.useDHCP = false;
-  #networking.interfaces.wlp0s20f3.useDHCP = true;
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-  console = {
-    font = "Lat2-Terminus16";
-    keyMap = "us";
-  };
-
-  # Setup display and window manager
-
-  services.xserver = {
-    enable = true;
-
-    displayManager = {
-      defaultSession = "none+i3";
-    };
-
-    desktopManager = {
-      xfce = {
-        enable = true;
-      };
-    };
-
-    windowManager.i3.enable = true;
-
-    videoDrivers = [ 
-      "modesetting" 
-    ];
-    
-    useGlamor = true;
-  };
-
-  #services.picom = {
-  #  enable = true;
-  #  backend = "glx";
-  #  vSync = true;
-  #};
-  services.tlp.enable = true;
-  services.blueman.enable = true;
-
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
-
-  # Enable sound.
-  sound.enable = true;
-  hardware = {
-
-    pulseaudio = {
-      enable = true;
-      package = pkgs.pulseaudioFull;
-      support32Bit = true;
-    };
-
-    bluetooth.enable = true;            # Enable bluetooth 
-    bluetooth.powerOnBoot = true;       # Let bluetooth enable on startup
-
-    opengl = {
-      enable = true;                    # Enable OpenGL
-      driSupport = true;
-      driSupport32Bit = true;           # Video support for Steam
-      setLdLibraryPath = true; 
-      extraPackages32 = with pkgs.pkgsi686Linux; [ 
-        libva 
-      ];
-      extraPackages = with pkgs; [
-        mesa
-      ];
-    };
-
-    steam-hardware.enable = true;
-  };
-
-  powerManagement.powertop.enable = true;
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver.libinput.enable = true;
-  services.xserver.libinput.touchpad.tapping = true;
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.betongsuggan = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
-  };
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    chromium
-    git
-    htop
-    vim
+  imports = [
+    ./programs/autorandr
+    ./programs/i3
+    ./programs/neovim
+    ./programs/picom
+    ./programs/polybar
+    ./programs/rofi
+    ./programs/x11
   ];
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
+  nixpkgs.config.allowUnfree = true;
 
-  # List services that you want to enable:
+  home.packages = with pkgs; [
+    glibcLocales
+    xorg.setxkbmap
+    xorg.libXft
+    rxvt-unicode-unwrapped
 
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+    # Display Management
+    brightnessctl
+    i3lock-fancy-rapid
 
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+    # Development
+    altair
+    adoptopenjdk-hotspot-bin-15
+    awscli2
+    docker-compose
+    gnumake
+    jetbrains.idea-ultimate
+    jq
+    kotlin
+    nodejs
 
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "20.09"; # Did you read the comment?
+    # Games
+    steam
+    retroarch
+    chiaki
 
+    # Utilities
+    gitAndTools.diff-so-fancy
+    ag
+    exfat
+    feh
+    gimp
+    gnome3.gedit
+    gparted
+    gthumb
+    htop
+    kazam
+    kdenlive
+    p7zip
+    nerdfonts
+    newman
+    postman
+    rofi
+    xfce.thunar
+    unzip
+    zoom-us
+
+    # Communication
+    slack
+    teams
+  ];
+
+  home.sessionVariables = {
+    EDITOR = "vim";
+    BROWSER = "firefox";
+    LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
+    TERMINFO_DIRS = "${pkgs.rxvt-unicode-unwrapped.terminfo.outPath}/share/terminfo";
+    JAVA_HOME = "/nix/store/wq13csng9gcyyaj9qhjh8z9fr9cgvp7f-adoptopenjdk-hotspot-bin-15.0.2";
+  };
+
+  programs.bash = import ./programs/bash;
+  elemental.home.programs.neovim.enable = true;
+
+  xsession.enable = true;
+
+  programs.git = {
+    enable = true;
+    userEmail = profile.mail;
+    userName = profile.name;
+
+    extraConfig.core.pager = "diff-so-fancy | less --tabs=4 -RFX";
+
+    aliases = {
+      "f" = "fetch -pt";
+      "s" = "status";
+      "d" = "diff";
+      "dn" = "diff --name-only";
+      "co" = "checkout";
+      "br" = "checkout -b";
+      "r"  = "rebase";
+
+      # Commits, additions, and modifications
+      "cm" = "commit -m";
+      "ca" = "commit --amend";
+      "aa" = "add .";
+      "au" = "add -u";
+      "rh" = "reset --hard";
+      "p"  = "push";
+      "fp"  = "push --force-with-lease";
+
+      # Logging
+      "lgo" = "log --oneline --graph";
+      "lo" = "log --oneline";
+      "ln" = "log -n"; # follow with a number to show n logs
+      "lon" = "log --oneline -n"; # follow with a number to show n logs
+      "tree" = "log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all";
+    };
+  };
+
+  systemd.user.services.mpris-proxy = {
+    Unit.Description = "Mpris proxy";
+    Unit.After = [ "network.target" "sound.target" ];
+    Service.ExecStart = "${pkgs.bluez}/bin/mpris-proxy";
+    Install.WantedBy = [ "default.target" ];
+  };
 }
-

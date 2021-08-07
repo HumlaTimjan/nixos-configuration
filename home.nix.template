@@ -1,0 +1,5 @@
+{ config, lib, pkgs, ... }:
+let
+  profile = import ./profiles/humla.nix;
+in
+  import ./configuration.nix { inherit config lib pkgs; profile = profile; }
