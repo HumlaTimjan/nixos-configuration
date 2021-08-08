@@ -100,6 +100,7 @@
 
   xsession.enable = true;
 
+  services.network-manager-applet.enable = true;
   programs.git = {
     enable = true;
     userEmail = profile.mail;
