@@ -52,6 +52,7 @@
     jq
     kotlin
     nodejs
+    nodePackages.node2nix
 
     # Games
     steam
@@ -64,6 +65,8 @@
     # Utilities
     gitAndTools.diff-so-fancy
     ag
+    bpytop
+    chromium
     exfat
     feh
     gimp
@@ -73,6 +76,7 @@
     htop
     kazam
     kdenlive
+    okular
     p7zip
     nerdfonts
     newman
@@ -80,6 +84,7 @@
     rofi
     xfce.thunar
     unzip
+    yubikey-manager
     zoom-us
 
     # Communication
@@ -93,6 +98,7 @@
     LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
     TERMINFO_DIRS = "${pkgs.rxvt-unicode-unwrapped.terminfo.outPath}/share/terminfo";
     JAVA_HOME = "${pkgs.adoptopenjdk-hotspot-bin-15}";
+    PATH = "$HOME/.npm-packages/bin:$PATH";
   };
 
   programs.bash = import ./programs/bash;
@@ -109,6 +115,7 @@
     extraConfig.core.pager = "diff-so-fancy | less --tabs=4 -RFX";
 
     aliases = {
+      "bt" = "bpytop";
       "f" = "fetch -pt";
       "s" = "status";
       "d" = "diff";

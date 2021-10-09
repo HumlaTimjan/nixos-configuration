@@ -10,7 +10,8 @@ in
     config = {
       startup = [
         {
-          command = ''${pkgs.xorg.setxkbmap}/bin/setxkbmap -variant 'colemak,' -layout 'us,se' -option "caps:escape,compose:ralt,grp:shifts_toggle,"'';
+          command = ''${pkgs.xorg.setxkbmap}/bin/setxkbmap -variant 'colemak,' -layout 'us,us' -option "caps:escape,compose:ralt,grp:shifts_toggle,"'';
+          #command = ''${pkgs.xorg.setxkbmap}/bin/setxkbmap -layout us -option "caps:escape,compose:ralt,grp:shifts_toggle,"'';
           always = true;
           notification = false;
         }
