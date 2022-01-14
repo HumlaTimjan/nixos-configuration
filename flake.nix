@@ -31,8 +31,18 @@
   in {
     homeManagerConfigurations = {
       br = user.mkHMUser {
-        userConfig={};
-        username="birgerrydback";
+        userConfig={
+          git = {
+            enable = true;
+            userName = "Betongsuggan";
+            userEmail = "rydback@gmail.com";
+          };
+          neovim.enable = true;
+          urxvt.enable = true;
+          bash.enable = true;
+          i3.enable = true;
+        };
+        username="betongsuggan";
       };
     };
 
