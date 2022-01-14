@@ -37,10 +37,13 @@
             userName = "Betongsuggan";
             userEmail = "rydback@gmail.com";
           };
+          autorandr.enable = true;
           neovim.enable = true;
           urxvt.enable = true;
           bash.enable = true;
           i3.enable = true;
+          rofi.enable = true;
+          polybar.enable = true;
         };
         username="betongsuggan";
       };

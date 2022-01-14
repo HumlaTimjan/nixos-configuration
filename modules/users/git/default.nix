@@ -26,6 +26,7 @@ in {
   };
 
   config = mkIf (cfg.enable) {
+    home.packages = [ pkgs.gitAndTools.diff-so-fancy ];
     programs.git = {
       enable = true;
       userName = cfg.userName;
