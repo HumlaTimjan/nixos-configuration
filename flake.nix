@@ -59,10 +59,31 @@
       };
     };
 
-    #nixosConfigurations = {
-    #  laptop = host.mkHost {
-    #    # ...
-    #  };
-    #};
+    nixosConfigurations = {
+      laptop = host.mkHost {
+          name = "laptop";
+          NICs = [ "wlp0s20f3" ];
+          kernelPackage = pkgs.linuxPackages_latest;
+          initrdMods = [ "xhci_pci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
+          kernelMods = [ "kvm-intel" ];
+          kernelParams = [];
+          systemConfig = {
+            touchpad.enable = true;
+            graphics.enable = true;
+            sound.enable = true;
+            docker.enable = true;
+            bluetooth.enable = true;
+            xserver.enable = true;
+            power-management.enable = true;
+          };
+          users = [{
+            name = "betonsuggan";
+            groups = [ "wheel" "networkmanager" "video" "docker" ];
+            uid = 1000;
+            shell = pkgs.bash;
+          }];
+          cpuCores = 4;
+      };
+    };
   };
 }
