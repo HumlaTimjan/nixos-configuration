@@ -60,9 +60,9 @@
     };
 
     nixosConfigurations = {
-      laptop = host.mkHost {
-          name = "laptop";
-          NICs = [ "wlp0s20f3" ];
+      nixos = host.mkHost {
+          name = "nixos";
+          NICs = []; #[ "wlp0s20f3" ];
           kernelPackage = pkgs.linuxPackages_latest;
           initrdMods = [ "xhci_pci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
           kernelMods = [ "kvm-intel" ];
@@ -77,7 +77,7 @@
             power-management.enable = true;
           };
           users = [{
-            name = "betonsuggan";
+            name = "betongsuggan";
             groups = [ "wheel" "networkmanager" "video" "docker" ];
             uid = 1000;
             shell = pkgs.bash;
