@@ -71,6 +71,10 @@ with builtins;
 
         time.timeZone = "Europe/Stockholm";
         i18n.defaultLocale = "en_US.UFT-8";
+        console = {
+          font = "Lat2-Terminus16";
+          keyMap = "us";
+        };
 
         nixpkgs.pkgs = pkgs;
 

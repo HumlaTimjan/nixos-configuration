@@ -62,7 +62,8 @@
     nixosConfigurations = {
       nixos = host.mkHost {
           name = "nixos";
-          NICs = []; #[ "wlp0s20f3" ];
+          NICs = []; 
+          wifi = [ "wlp0s20f3" ];
           kernelPackage = pkgs.linuxPackages_latest;
           initrdMods = [ "xhci_pci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
           kernelMods = [ "kvm-intel" ];
