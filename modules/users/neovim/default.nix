@@ -8,6 +8,9 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    home.sessionVariables = {
+      EDITOR="vim";
+    };
     programs.neovim = {
       enable = true;
       extraConfig = " 

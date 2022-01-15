@@ -4,7 +4,7 @@ with builtins;
   mkHMUser = {userConfig, username}:
     home-manager.lib.homeManagerConfiguration {
       inherit system username pkgs;
-      stateVersion = "21.05";
+      stateVersion = "21.11";
       configuration =
         let
           trySettings = tryEval (fromJSON (readFile /etc/hmsystemdata.json));
@@ -25,7 +25,7 @@ with builtins;
           nixpkgs.config.allowUnfree = true;
 
           systemd.user.startServices = true;
-          home.stateVersion = "21.05";
+          home.stateVersion = "21.11";
           home.username = username;
           home.homeDirectory = "/home/${username}";
 

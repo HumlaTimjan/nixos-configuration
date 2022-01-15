@@ -1,4 +1,3 @@
-# .dotfiles/modules/users/git/default.nix
 { pkgs, config, lib, ... }:
 with lib;
 

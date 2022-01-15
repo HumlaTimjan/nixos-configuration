@@ -3,8 +3,10 @@
 {
   imports = [
     ./autorandr
+    ./audio
     ./i3
     ./git
+    ./colemak
     ./neovim
     ./bash
     ./alacritty
@@ -13,5 +15,6 @@
     ./polybar
     ./rofi
     ./x11
+    ./fonts
   ];
 }

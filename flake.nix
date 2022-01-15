@@ -31,19 +31,23 @@
   in {
     homeManagerConfigurations = {
       br = user.mkHMUser {
-        userConfig={
+        userConfig = {
           git = {
             enable = true;
             userName = "Betongsuggan";
             userEmail = "rydback@gmail.com";
           };
           autorandr.enable = true;
+          audio.enable = true;
           neovim.enable = true;
           urxvt.enable = true;
           bash.enable = true;
           i3.enable = true;
           rofi.enable = true;
           polybar.enable = true;
+          fonts.enable = true;
+          x11.enable = true;
+          colemak.enable = true;
         };
         username="betongsuggan";
       };

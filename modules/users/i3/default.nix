@@ -11,27 +11,31 @@ in
   };
 
   config = mkIf (cfg.enable) {
+    services.network-manager-applet.enable = true;
+
+    home.packages = with pkgs; [ feh brightnessctl i3lock-fancy-rapid ];
+
     xsession.windowManager.i3 = {
       enable = true;
       package = pkgs.i3-gaps;
       config = {
         startup = [
-          {
-            command = ''${pkgs.xorg.setxkbmap}/bin/setxkbmap -variant 'colemak,' -layout 'us,us' -option "caps:escape,compose:ralt,grp:shifts_toggle,"'';
-            #command = ''${pkgs.xorg.setxkbmap}/bin/setxkbmap -layout us -option "caps:escape,compose:ralt,grp:shifts_toggle,"'';
-            always = true;
-            notification = false;
-          }
-          {
-            command = "nm-applet";
-            always = true;
-            notification = false;
-          }
-          {
-            command = "blueman-applet";
-            always = true;
-            notification = false;
-          }
+          #{
+          #  command = ''${pkgs.xorg.setxkbmap}/bin/setxkbmap -variant 'colemak,' -layout 'us,us' -option "caps:escape,compose:ralt,grp:shifts_toggle,"'';
+          #  #command = ''${pkgs.xorg.setxkbmap}/bin/setxkbmap -layout us -option "caps:escape,compose:ralt,grp:shifts_toggle,"'';
+          #  always = true;
+          #  notification = false;
+          #}
+          #{
+          #  command = "nm-applet";
+          #  always = true;
+          #  notification = false;
+          #}
+          #{
+          #  command = "blueman-applet";
+          #  always = true;
+          #  notification = false;
+          #}
           {
             command = "feh --bg-center ~/Pictures/nix-background.png";
             always = false;
@@ -216,6 +220,13 @@ in
           };
         };
       };
+    };
+
+    systemd.user.services.mpris-proxy = {
+      Unit.Description = "Mpris proxy";
+      Unit.After = [ "network.target" "sound.target" ];
+      Service.ExecStart = "${pkgs.bluez}/bin/mpris-proxy";
+      Install.WantedBy = [ "default.target" ];
     };
   };
 }

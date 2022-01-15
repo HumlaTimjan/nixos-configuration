@@ -10,16 +10,20 @@ in
   };
 
   config = mkIf (cfg.enable) {
+    home.sessionVariables = {
+      TERMINFO_DIRS = "${pkgs.rxvt-unicode-unwrapped.terminfo.outPath}/share/terminfo";
+    };
     programs.urxvt = {
       enable = true;
-      iso14755 = true;
+      iso14755 = false;
       scroll.bar.enable = false;
       extraConfig = {
         cursorBlink = true;
+        iso14755_52 = false;
       };
       keybindings = {
         "Shift-Control-V" = "eval:paste_clipboard";
-        "Shift-Control-C" = "eval:selection_to_clipboar";
+        "Shift-Control-C" = "eval:selection_to_clipboard";
       };
       fonts = [
         "xft:Hasklug Nerd Font Mono,Hasklig Medium:style=Medium,Regular:pixelsize=11"
