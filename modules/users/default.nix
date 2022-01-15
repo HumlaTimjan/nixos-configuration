@@ -2,11 +2,14 @@
 { pkgs, config, lib, ... }:
 {
   imports = [
+    ./general
     ./autorandr
     ./audio
     ./i3
     ./git
     ./colemak
+    ./communication
+    ./development
     ./neovim
     ./bash
     ./alacritty
@@ -16,5 +19,7 @@
     ./rofi
     ./x11
     ./fonts
+    ./games
+    ./browsers
   ];
 }

@@ -37,6 +37,9 @@
             userName = "Betongsuggan";
             userEmail = "rydback@gmail.com";
           };
+          general.enable = true;
+          communication.enable = true;
+          browsers.enable = true;
           autorandr.enable = true;
           audio.enable = true;
           neovim.enable = true;
@@ -45,9 +48,12 @@
           i3.enable = true;
           rofi.enable = true;
           polybar.enable = true;
+          picom.enable = true;
           fonts.enable = true;
           x11.enable = true;
           colemak.enable = true;
+          development.enable = true;
+          games.enable = true;
         };
         username="betongsuggan";
       };
