@@ -9,7 +9,7 @@ in
 
   config = lib.mkIf cfg.enable {
     home.sessionVariables = {
-      EDITOR="vim";
+      EDITOR="nvim";
     };
     programs.neovim = {
       enable = true;

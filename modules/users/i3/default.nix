@@ -20,22 +20,26 @@ in
       package = pkgs.i3-gaps;
       config = {
         startup = [
-          #{
-          #  command = ''${pkgs.xorg.setxkbmap}/bin/setxkbmap -variant 'colemak,' -layout 'us,us' -option "caps:escape,compose:ralt,grp:shifts_toggle,"'';
-          #  #command = ''${pkgs.xorg.setxkbmap}/bin/setxkbmap -layout us -option "caps:escape,compose:ralt,grp:shifts_toggle,"'';
-          #  always = true;
-          #  notification = false;
-          #}
-          #{
-          #  command = "nm-applet";
-          #  always = true;
-          #  notification = false;
-          #}
-          #{
-          #  command = "blueman-applet";
-          #  always = true;
-          #  notification = false;
-          #}
+          {
+            command = "systemctl --user restart polybar.service";
+            always = true;
+            notification = false;
+          }
+          {
+            command = "systemctl --user restart picom.service";
+            always = true;
+            notification = false;
+          }
+          {
+            command = "nm-applet";
+            always = true;
+            notification = false;
+          }
+          {
+            command = "blueman-applet";
+            always = true;
+            notification = false;
+          }
           {
             command = "feh --bg-center ~/Pictures/nix-background.png";
             always = false;

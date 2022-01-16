@@ -50,7 +50,6 @@ with builtins;
 
         networking.hostName = "${name}";
         networking.interfaces = networkCfg;
-        networking.wireless.interfaces = wifi;
 
         networking.networkmanager.enable = true;
         networking.useDHCP = false;
@@ -62,6 +61,8 @@ with builtins;
         boot.kernel.sysctl = {
           "vm.max_map_count" = 262144;
         };
+        hardware.enableRedistributableFirmware = true;
+        hardware.enableAllFirmware = true;
 
         boot.loader.systemd-boot.enable = true;
         boot.loader.systemd-boot.configurationLimit = 5;
@@ -70,13 +71,11 @@ with builtins;
         boot.loader.grub.configurationLimit = 6;
 
         time.timeZone = "Europe/Stockholm";
-        i18n.defaultLocale = "en_US.UFT-8";
-        console = {
-          font = "Lat2-Terminus16";
-          keyMap = "us";
-        };
 
         nixpkgs.pkgs = pkgs;
+        nixpkgs.config = {
+          allowUnfree = true;
+        };
 
         nix.maxJobs = lib.mkDefault cpuCores;
         nix.package = pkgs.nixUnstable;
