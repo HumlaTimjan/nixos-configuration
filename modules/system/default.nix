@@ -1,12 +1,15 @@
 { pkgs, config, lib, ... }:
 {
   imports = [
-    ./touchpad
-    ./graphics
-    ./sound
-    ./docker
     ./bluetooth
+    ./disk-encryption
+    ./docker
+    ./firewall
+    ./graphics
     ./power-management
+    ./printers
+    ./sound
+    ./touchpad
     ./xserver
   ];
 }

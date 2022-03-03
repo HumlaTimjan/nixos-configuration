@@ -14,17 +14,21 @@ in {
       altair
       adoptopenjdk-hotspot-bin-15
       awscli2
+      docker-compose_2
       gnumake
       jetbrains.idea-ultimate
       jq
       kotlin
       newman
       nodejs
+      nodePackages.node2nix
+      nodePackages.npm
+      python3
       postman
     ];
     home.sessionVariables = {
       JAVA_HOME = "${pkgs.adoptopenjdk-hotspot-bin-15}";
-      PATH="$HOME/.npm-packages/bin:$PATH";
+      PATH="$HOME/node_modules/bin:$PATH";
     };
   };
 }

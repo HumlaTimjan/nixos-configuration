@@ -12,6 +12,7 @@ in {
     home.keyboard = {
       layout = "us,us";
       variant = "colemak,";
+      #layout = "us";
       options = [
         "caps:escape"
         "compose:ralt"

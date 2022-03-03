@@ -27,7 +27,9 @@ in {
       yubikey-manager
       xfce.thunar            
       xfce.thunar-volman     
-      gnome.gvfs        
+      gvfs
+      polkit
+      udisks
       vlc
     ];
   };

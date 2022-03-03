@@ -8,6 +8,7 @@ with builtins;
     kernelMods, 
     kernelParams, 
     kernelPackage,
+    fileSystems,
     systemConfig, 
     cpuCores, 
     users, 
@@ -38,15 +39,7 @@ with builtins;
           "hmsystemdata.json".text = toJSON userCfg;
         };
 
-        fileSystems."/" = { 
-          device = "/dev/disk/by-uuid/e6fa26ba-7e3a-4146-8bba-54fd65aa211a";
-          fsType = "ext4";
-        };
-  
-        fileSystems."/boot" = { 
-          device = "/dev/disk/by-uuid/C8DA-ECD3";
-          fsType = "vfat";
-        };
+        fileSystems = fileSystems;
 
         networking.hostName = "${name}";
         networking.interfaces = networkCfg;
@@ -82,6 +75,8 @@ with builtins;
         nix.extraOptions = ''
           experimental-features = nix-command flakes
         '';
+
+        powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
 
         system.stateVersion = "21.11";
       }

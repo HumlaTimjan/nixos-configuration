@@ -17,7 +17,6 @@ in {
   config = mkIf (cfg.enable) {
     home.packages = with pkgs; [
       chromium
-      firefox
       tor-browser-bundle-bin
     ];
     home.sessionVariables = {
