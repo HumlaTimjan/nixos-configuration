@@ -10,21 +10,21 @@ in {
 
   config = mkIf (cfg.enable) {
     home.packages = with pkgs; [ 
-      ag
       altair
       adoptopenjdk-hotspot-bin-15
       awscli2
       docker-compose_2
       gnumake
-      jetbrains.idea-ultimate
+      jetbrains.idea-community
       jq
       kotlin
       newman
-      nodejs
+      nodejs-14_x
       nodePackages.node2nix
-      nodePackages.npm
+      #nodePackages.npm
       python3
       postman
+      silver-searcher
     ];
     home.sessionVariables = {
       JAVA_HOME = "${pkgs.adoptopenjdk-hotspot-bin-15}";

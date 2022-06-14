@@ -12,7 +12,7 @@ in {
     home.packages = with pkgs; [
       slack
       teams
-      zoom-us
+      #zoom-us
       skypeforlinux
     ];
   };

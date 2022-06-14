@@ -12,6 +12,7 @@ in {
     home.packages = with pkgs; [
       bpytop
       kazam    
+      etcher
       exfat
       gimp        
       gnome3.gedit

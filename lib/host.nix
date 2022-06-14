@@ -9,6 +9,7 @@ with builtins;
     kernelParams, 
     kernelPackage,
     fileSystems,
+    swap,
     systemConfig, 
     cpuCores, 
     users, 
@@ -40,10 +41,12 @@ with builtins;
         };
 
         fileSystems = fileSystems;
+        swapDevices = [ { device = swap; } ];
 
         networking.hostName = "${name}";
         networking.interfaces = networkCfg;
 
+        networking.wireless.enable = false;
         networking.networkmanager.enable = true;
         networking.useDHCP = false;
 

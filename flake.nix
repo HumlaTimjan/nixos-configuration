@@ -2,7 +2,7 @@
   description = "Betongsuggan's flake to rule them all. Proudly stolen from https://jdisaacs.com/blog/nixos-config/";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-unstable";
+    nixpkgs.url = "nixpkgs/nixos-22.05";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -86,8 +86,44 @@
     };
 
     nixosConfigurations = {
-      laptop = host.mkHost {
-          name = "nixos";
+     # laptop = host.mkHost {
+     #     name = "nixos";
+     #     NICs = [ "wlp0s20f3" ]; 
+     #     kernelPackage = pkgs.linuxPackages_5_15;
+     #     initrdMods = [ "xhci_pci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
+     #     kernelMods = [ "kvm-intel" "iwlwifi" ];
+     #     kernelParams = [];
+     #     fileSystems = {
+     #       "/" = {
+     #         device = "/dev/disk/by-uuid/0c799567-d4e0-44e8-9007-60c28fdbe367";
+     #         fsType = "ext4";
+     #       };
+  
+     #       "/boot" = {
+     #         device = "/dev/disk/by-uuid/AEFE-A292";
+     #         fsType = "vfat";
+     #       };
+     #     };
+     #     swap = "/dev/disk/by-uuid/bda65168-5ec0-4cf9-9bcf-15fa4a3328ce";
+     #     systemConfig = {
+     #       touchpad.enable = true;
+     #       graphics.enable = true;
+     #       sound.enable = true;
+     #       docker.enable = true;
+     #       bluetooth.enable = true;
+     #       xserver.enable = true;
+     #       power-management.enable = true;
+     #     };
+     #     users = [{
+     #       name = "betongsuggan";
+     #       groups = [ "wheel" "networkmanager" "video" "docker" ];
+     #       uid = 1000;
+     #       shell = pkgs.bash;
+     #     }];
+     #     cpuCores = 4;
+     # };
+      humla-nixos = host.mkHost {
+          name = "humla-nixos";
           NICs = [ "wlp0s20f3" ]; 
           kernelPackage = pkgs.linuxPackages_5_15;
           initrdMods = [ "xhci_pci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
@@ -95,50 +131,16 @@
           kernelParams = [];
           fileSystems = {
             "/" = {
-              device = "/dev/disk/by-uuid/e6fa26ba-7e3a-4146-8bba-54fd65aa211a";
+              device = "/dev/disk/by-uuid/0c799567-d4e0-44e8-9007-60c28fdbe367";
               fsType = "ext4";
             };
   
             "/boot" = {
-              device = "/dev/disk/by-uuid/C8DA-ECD3";
+              device = "/dev/disk/by-uuid/AEFE-A292";
               fsType = "vfat";
             };
           };
-          systemConfig = {
-            touchpad.enable = true;
-            graphics.enable = true;
-            sound.enable = true;
-            docker.enable = true;
-            bluetooth.enable = true;
-            xserver.enable = true;
-            power-management.enable = true;
-          };
-          users = [{
-            name = "betongsuggan";
-            groups = [ "wheel" "networkmanager" "video" "docker" ];
-            uid = 1000;
-            shell = pkgs.bash;
-          }];
-          cpuCores = 4;
-      };
-      laptop-work = host.mkHost {
-          name = "nixos";
-          NICs = [ "wlp0s20f3" ]; 
-          kernelPackage = pkgs.linuxPackages_5_15;
-          initrdMods = [ "xhci_pci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
-          kernelMods = [ "kvm-intel" "iwlwifi" ];
-          kernelParams = [];
-          fileSystems = {
-            "/" = { 
-              device = "/dev/disk/by-uuid/7027e0ee-fd6a-41e8-a0b3-ea0b4855fcce";
-              fsType = "ext4";
-            };
-        
-            "/boot" ={ 
-              device = "/dev/disk/by-uuid/F65E-B142";
-              fsType = "vfat";
-            };
-          };
+          swap = "/dev/disk/by-uuid/bda65168-5ec0-4cf9-9bcf-15fa4a3328ce";
           systemConfig = {
             touchpad.enable = true;
             graphics.enable = true;
@@ -150,7 +152,8 @@
             power-management.enable = true;
             diskEncryption = {
               enable = true;
-              diskId = "da540ce4-42b1-4020-a014-99cdc57fcbdc";
+              diskId = "33b56bc7-dd4f-4a2d-a000-1d8cb6cfbdb3";
+              headerId = "2556269d-06e3-4e5b-94dd-9a2a7fc0fda9";
             };
             firewall = {
               enable = true;

@@ -11,9 +11,21 @@ in {
       description = "UUID of disk that is encrypted by Luks";
       type = types.str;
     };
+
+    headerId = mkOption {
+      description = "UUID of disk that is contains header for encrypted partition";
+      type = types.str;
+    };
   };
 
   config = mkIf (cfg.enable) {
-    boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-uuid/${cfg.diskId}";
+    boot.initrd.luks.devices = {
+      crypted = {
+        device = "/dev/disk/by-partuuid/${cfg.diskId}";
+        header = "/dev/disk/by-partuuid/${cfg.headerId}";
+        allowDiscards = true;
+        preLVM = true;
+      };
+    };
   };
 }
