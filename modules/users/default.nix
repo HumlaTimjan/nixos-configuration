@@ -6,7 +6,7 @@
     ./audio
     ./i3
     ./git
-    ./colemak
+    ./keyboard
     ./communication
     ./development
     ./neovim

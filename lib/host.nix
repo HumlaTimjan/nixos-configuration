@@ -2,14 +2,10 @@
 with builtins;
 {
   mkHost = { 
-    name, 
+    name,
+    hardwareConfiguration, 
     NICs, 
-    initrdMods, 
-    kernelMods, 
-    kernelParams, 
-    kernelPackage,
     fileSystems,
-    swap,
     systemConfig, 
     cpuCores, 
     users, 
@@ -27,21 +23,17 @@ with builtins;
     };
 
     sys_users = (map (u: user.mkSystemUser u) users);
+
   in lib.nixosSystem {
     inherit system;
 
     modules = [
       {
-        imports = [ ../modules/system ] ++ sys_users;
+        imports = [ ../modules/system hardwareConfiguration ] ++ sys_users;
 
         br = systemConfig;
 
-        environment.etc = {
-          "hmsystemdata.json".text = toJSON userCfg;
-        };
-
         fileSystems = fileSystems;
-        swapDevices = [ { device = swap; } ];
 
         networking.hostName = "${name}";
         networking.interfaces = networkCfg;
@@ -49,22 +41,6 @@ with builtins;
         networking.wireless.enable = false;
         networking.networkmanager.enable = true;
         networking.useDHCP = false;
-
-        boot.initrd.availableKernelModules = initrdMods;
-        boot.kernelModules = kernelMods;
-        boot.kernelParams = kernelParams;
-        boot.kernelPackages = kernelPackage;
-        boot.kernel.sysctl = {
-          "vm.max_map_count" = 262144;
-        };
-        hardware.enableRedistributableFirmware = true;
-        hardware.enableAllFirmware = true;
-
-        boot.loader.systemd-boot.enable = true;
-        boot.loader.systemd-boot.configurationLimit = 5;
-        boot.loader.efi.canTouchEfiVariables = true;
-        boot.loader.grub.useOSProber = true;
-        boot.loader.grub.configurationLimit = 6;
 
         time.timeZone = "Europe/Stockholm";
 
@@ -78,10 +54,9 @@ with builtins;
         nix.extraOptions = ''
           experimental-features = nix-command flakes
         '';
-
-        powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
-
-        system.stateVersion = "21.11";
+        
+        services.openssh.enable = true; 
+        system.stateVersion = "22.05";
       }
     ];
   };

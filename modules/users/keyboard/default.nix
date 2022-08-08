@@ -2,17 +2,16 @@
 with lib;
 
 let
-  cfg = config.br.colemak;
+  cfg = config.br.keyboard;
 in {
-  options.br.colemak = {
-    enable = mkEnableOption "Enable Colemak keyboard layout";
+  options.br.keyboard = {
+    enable = mkEnableOption "Configure keyboard layout";
   };
 
   config = mkIf (cfg.enable) {
     home.keyboard = {
-      layout = "us,us";
-      variant = "colemak,";
-      #layout = "us";
+      layout = "se,us,us";
+      variant = ",colemak,";
       options = [
         "caps:escape"
         "compose:ralt"

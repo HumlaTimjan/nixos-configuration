@@ -26,11 +26,6 @@ in
             notification = false;
           }
           {
-            command = "systemctl --user restart picom.service";
-            always = true;
-            notification = false;
-          }
-          {
             command = "nm-applet";
             always = true;
             notification = false;
