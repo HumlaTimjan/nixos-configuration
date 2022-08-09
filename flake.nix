@@ -34,6 +34,11 @@
     homeManagerConfigurations = {
       monitoring = user.mkHMUser {
         userConfig = {
+          git = {
+            enable = true;
+            userName = "HumlaBot";
+            userEmail = "engineering+humlabot@humla.io";
+          };
           general.enable = true;
 	        fonts.enable = true;
           keyboard.enable = true;
