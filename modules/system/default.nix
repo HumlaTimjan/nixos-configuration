@@ -9,6 +9,7 @@
     ./power-management
     ./printers
     ./sound
+    ./ssh
     ./touchpad
     ./xserver
   ];

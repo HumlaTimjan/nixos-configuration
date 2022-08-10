@@ -76,6 +76,7 @@
               enable = false;
               tcpPorts = [ 8080 ];
             };
+            ssh.enable = true;
           };
           users = [{
             name = "humla-dashboard";

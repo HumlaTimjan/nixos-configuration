@@ -55,7 +55,6 @@ with builtins;
           experimental-features = nix-command flakes
         '';
         
-        services.openssh.enable = true; 
         system.stateVersion = "22.05";
       }
     ];
